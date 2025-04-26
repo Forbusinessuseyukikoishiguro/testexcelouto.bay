@@ -1,0 +1,52 @@
+@echo off
+REM ===================================================================
+REM バッチファイルの各行の説明
+REM @echo off       : コマンドの実行内容を画面に表示しない
+REM REM             : コメント行（実行されない）
+REM set EXCEL_FILES : 開きたいExcelファイルのパスを変数に設定
+REM for %%f in      : 各ファイルに対してループ処理を行う
+REM echo            : メッセージをコンソールに表示
+REM start "" "%%f"  : 関連付けられたプログラム(Excel)でファイルを開く
+REM                 : 最初の""は空のウィンドウタイトル、二つ目は開くファイルパス
+REM ===================================================================
+
+REM Excelを使って指定したファイルを開くバッチファイル
+REM 以下に開きたいExcelファイルのパスを入力してください（複数可）
+set EXCEL_FILES=C:\Users\hogehoge\Downloads\test2\test2excel.xlsx C:\Users\hogehoge\Downloads\test1\test1excel.xlsx
+
+REM Excelで開く（各ファイルに対してループ処理）
+for %%f in (%EXCEL_FILES%) do (
+    echo %%fを開いています...
+    start "" "%%f"
+)
+
+echo 完了しました！
+
+REM ===================================================================
+REM 複数のファイルパスを指定する方法：
+REM 
+REM 1. 基本的な指定方法（スペースで区切る）
+REM    set EXCEL_FILES=C:\path\file1.xlsx C:\path\file2.xlsx
+REM 
+REM 2. パスにスペースが含まれる場合（引用符で囲む）
+REM    set EXCEL_FILES="C:\My Documents\file1.xlsx" "D:\Work Files\file2.xlsx"
+REM 
+REM 3. 長いパスリストを見やすくする方法（キャレット^で複数行に分割）
+REM    set EXCEL_FILES=^
+REM    C:\path\file1.xlsx ^
+REM    C:\path\file2.xlsx
+REM 
+REM 4. ワイルドカードを使用する方法（フォルダ内のすべてのExcelファイルを開く）
+REM    set EXCEL_FOLDER=C:\path\to\folder
+REM    for %%f in ("%EXCEL_FOLDER%\*.xlsx") do (
+REM        start "" "%%f"
+REM    )
+REM 
+REM 5. 複数のフォルダからファイルを開く方法
+REM    set FOLDERS=C:\folder1 D:\folder2
+REM    for %%d in (%FOLDERS%) do (
+REM        for %%f in ("%%d\*.xlsx") do (
+REM            start "" "%%f"
+REM        )
+REM    )
+REM ===================================================================
