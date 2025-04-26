@@ -1,0 +1,78 @@
+@echo off
+REM ===================================================================
+REM バッチファイルの各行の説明
+REM @echo off       : コマンドの実行内容を画面に表示しない
+REM REM             : コメント行（実行されない）
+REM set FILES       : 開きたいファイルのパスを変数に設定（様々な拡張子可）
+REM for %%f in      : 各ファイルに対してループ処理を行う
+REM echo            : メッセージをコンソールに表示
+REM start "" "%%f"  : 関連付けられたプログラムでファイルを開く
+REM                 : （Excel、メモ帳、PDFリーダーなど）
+REM ===================================================================
+
+REM 様々なタイプのファイルを開くバッチファイル
+REM 以下に開きたいファイルのパスを入力してください（複数可）
+REM Excelファイル(.xlsx)、テキストファイル(.txt)、PDFなど様々なタイプのファイルを指定できます
+
+set FILES=^
+C:\Users\hogehoge\Downloads\test2\test2excel.xlsx ^
+C:\Users\hogehoge\Documents\memo.txt ^
+C:\Users\hogehoge\Documents\report.pdf
+
+REM ファイルを開く（各ファイルに対してループ処理）
+for %%f in (%FILES%) do (
+    echo %%fを開いています...
+    start "" "%%f"
+)
+
+echo 完了しました！
+
+REM ===================================================================
+REM 特定タイプのファイルのみ開く例：
+REM 
+REM 1. Excelファイルとテキストファイルだけを指定
+REM    set EXCEL_FILES=C:\path\file1.xlsx C:\path\file2.xlsx
+REM    set TEXT_FILES=C:\path\note1.txt C:\path\note2.txt
+REM    
+REM    REM Excelファイルを開く
+REM    for %%f in (%EXCEL_FILES%) do (
+REM        start "" "%%f"
+REM    )
+REM    
+REM    REM テキストファイルを開く
+REM    for %%f in (%TEXT_FILES%) do (
+REM        start "" "%%f"
+REM    )
+REM 
+REM 2. 様々な拡張子のファイルをフォルダから開く
+REM    set FOLDER=C:\Users\hogehoge\Documents
+REM    
+REM    REM Excelファイルを開く
+REM    for %%f in ("%FOLDER%\*.xlsx") do (
+REM        start "" "%%f"
+REM    )
+REM    
+REM    REM テキストファイルを開く
+REM    for %%f in ("%FOLDER%\*.txt") do (
+REM        start "" "%%f"
+REM    )
+REM    
+REM    REM PDFファイルを開く
+REM    for %%f in ("%FOLDER%\*.pdf") do (
+REM        start "" "%%f"
+REM    )
+REM ===================================================================
+
+REM ===================================================================
+REM 特定のプログラムでファイルを開きたい場合：
+REM 
+REM 1. メモ帳で特定のテキストファイルを開く
+REM    start notepad.exe "C:\path\to\file.txt"
+REM 
+REM 2. Excelで特定のファイルを開く
+REM    start excel.exe "C:\path\to\file.xlsx"
+REM 
+REM 3. 既定のプログラムを使わず、特定のプログラムでファイルを開く
+REM    start "C:\Program Files\Microsoft Office\root\Office16\EXCEL.EXE" "C:\path\to\file.xlsx"
+REM    start "C:\Program Files\Adobe\Acrobat Reader DC\Reader\AcroRd32.exe" "C:\path\to\file.pdf"
+REM ===================================================================
